@@ -42,6 +42,7 @@ namespace SocialNetwork
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();
