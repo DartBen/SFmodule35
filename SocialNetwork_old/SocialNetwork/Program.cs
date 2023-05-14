@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using SocialNetwork.Data;
 using SocialNetwork.Data.AutoMapper;
 using SocialNetwork.Data.Context;
+using SocialNetwork.Data.UnitOfWorks;
 using SocialNetwork.ViewModels;
 
 namespace SocialNetwork
@@ -18,14 +19,19 @@ namespace SocialNetwork
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 
-            builder.Services.AddIdentity<User, IdentityRole>(opts => {
-                 opts.Password.RequiredLength = 5;
-                 opts.Password.RequireNonAlphanumeric = false;
-                 opts.Password.RequireLowercase = false;
-                 opts.Password.RequireUppercase = false;
-                 opts.Password.RequireDigit = false;
-             })
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            builder.Services
+                .AddIdentity<User, IdentityRole>(opts =>
+                {
+                    opts.Password.RequiredLength = 5;
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireDigit = false;
+                })
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -52,11 +58,15 @@ namespace SocialNetwork
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapRazorPages();
-
             app.MapControllerRoute(
                 name: "Register",
                 pattern: "{controller=Register}/{action=Register}/{id?}");
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapRazorPages();
 
             app.Run();
         }
