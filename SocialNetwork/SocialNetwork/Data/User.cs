@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SocialNetwork
+namespace SocialNetwork.Data
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
         public DateTime BirthDate { get; set; }
     }
 }

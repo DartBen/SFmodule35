@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SocialNetwork.Data;
+using SocialNetwork.Data.AutoMapper;
+using SocialNetwork.Data.Context;
 using SocialNetwork.ViewModels;
 
 namespace SocialNetwork
@@ -24,6 +26,10 @@ namespace SocialNetwork
                  opts.Password.RequireDigit = false;
              })
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddUnitOfWork();
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
             // Add services to the container.

@@ -1,4 +1,6 @@
-﻿namespace SocialNetwork.Data
+﻿using SocialNetwork.Data.Repository;
+
+namespace SocialNetwork.Data.UnitOfWorks
 {
     public interface IUnitOfWork : IDisposable
     {
