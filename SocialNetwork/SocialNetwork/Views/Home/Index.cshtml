@@ -1,16 +1,14 @@
-﻿@page
-@{
+﻿@{
     ViewData["Title"] = "Главная";
 }
-@model SocialNetwork.ViewModels.Account.MainViewModel;
+@model SocialNetwork.ViewModels.MainViewModel;
 
 <div class="row">
     <div class="side">
         Описание самой клевой соцсети
     </div>
     <div class="main">
-        блок регистрации
-        блок авторизации
-        <partial name="Register" />
+        <partial name="Login" model="@Model.LoginView" />
+        <partial name="Register" model="@Model.RegisterView" />
     </div>
 </div>
