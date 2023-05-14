@@ -27,7 +27,6 @@ namespace SocialNetwork
              })
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            builder.Services.AddUnitOfWork();
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
