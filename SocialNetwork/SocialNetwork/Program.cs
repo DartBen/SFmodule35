@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using SocialNetwork.Data;
+using SocialNetwork.ViewModels;
 
 namespace SocialNetwork
 {
@@ -46,6 +48,10 @@ namespace SocialNetwork
             app.UseAuthorization();
 
             app.MapRazorPages();
+
+            app.MapControllerRoute(
+                name: "Register",
+                pattern: "{controller=Register}/{action=Register}/{id?}");
 
             app.Run();
         }
