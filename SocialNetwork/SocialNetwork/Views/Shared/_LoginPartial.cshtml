@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using SocialNetwork.Data;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <div class="righ-align">
+        <button  asp-area="" asp-controller="AccountManager" asp-action="Logout">Выход</button>
+    </div>
+    }

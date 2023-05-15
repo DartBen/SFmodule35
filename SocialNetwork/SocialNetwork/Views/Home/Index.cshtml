@@ -1,8 +1,19 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@using SocialNetwork.Data;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager;
+
+@{
     ViewData["Title"] = "Главная";
 }
 @model SocialNetwork.ViewModels.MainViewModel;
 
+@if (SignInManager.IsSignedIn(User))
+{
+    <div>Hello @User.Identity!</div>
+}
+else
+{
 <div class="row">
     <div class="side">
         <div class="center">
@@ -16,3 +27,4 @@
         <partial name="Register" model="@Model.RegisterView" />
     </div>
 </div>
+}

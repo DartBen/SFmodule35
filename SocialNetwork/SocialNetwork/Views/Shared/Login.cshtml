@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Login";
 }
-<div class="righ-align">
+<div class="block-reg background-white">
+    <h4 class="center">Добро пожаловать!</h4>
     <form method="post" asp-controller="AccountManager" asp-action="Login">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
@@ -22,7 +23,5 @@
         <input type="submit" value="Войти" />
     </div>
     </form>
-
-    <!--<button class="enter_submit" asp-area="" asp-controller="AccountManager" asp-action="Logout">Выход</button>-->
 </div>
 
