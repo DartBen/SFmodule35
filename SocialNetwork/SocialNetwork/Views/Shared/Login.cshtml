@@ -15,11 +15,14 @@
         <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
-
     <div>
-        <input type="submit" value="Регистрация" />
+            <input type="checkbox" asp-for="RememberMe" value="true"> Да<Br>
+    </div>
+    <div>
+        <input type="submit" value="Войти" />
     </div>
     </form>
-    <button class="enter_submit" asp-area="" asp-controller="AccountManager" asp-action="Logout">Выход</button>
+
+    <!--<button class="enter_submit" asp-area="" asp-controller="AccountManager" asp-action="Logout">Выход</button>-->
 </div>
 

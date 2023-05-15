@@ -15,8 +15,8 @@ namespace SocialNetwork.ViewModels.Account
         public string Password { get; set; }
 
         [Display(Name = "Запомнить?")]
-        public bool RememberMe { get; set; }
+        public bool RememberMe { get; set; } = false;
 
-        public string ReturnUrl { get; set; }
+        public string ReturnUrl { get; set; } = string.Empty;
     }
 }
