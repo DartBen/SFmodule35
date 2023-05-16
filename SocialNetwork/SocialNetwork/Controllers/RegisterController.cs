@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Data;
+using SocialNetwork.Models.Users;
 using SocialNetwork.ViewModels.Account;
 
 namespace SocialNetwork.Controllers

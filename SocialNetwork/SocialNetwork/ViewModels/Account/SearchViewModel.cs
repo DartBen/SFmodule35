@@ -1,4 +1,4 @@
-﻿using SocialNetwork.Data;
+﻿using SocialNetwork.Models.Users;
 
 namespace SocialNetwork.ViewModels.Account
 {

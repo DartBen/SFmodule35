@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Data.AutoMapper;
 using SocialNetwork.Data.Context;
+using SocialNetwork.Data.Repository;
 using SocialNetwork.Data.UnitOfWorks;
-using SocialNetwork.Data;
+using SocialNetwork.Extensions;
+using SocialNetwork.Models.Users;
 
 namespace SocialNetwork
 {
@@ -15,9 +17,10 @@ namespace SocialNetwork
 
             string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
-
-            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services
+                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
+                .AddCustomRepository<Friend, FriendsRepository>()
+                .AddTransient<IUnitOfWork, UnitOfWork>();
 
             builder.Services
                 .AddIdentity<User, IdentityRole>(opts =>

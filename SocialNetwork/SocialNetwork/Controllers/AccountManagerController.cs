@@ -2,10 +2,10 @@
 using SocialNetwork.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Data;
 using Microsoft.AspNetCore.Authorization;
 using SocialNetwork.Data.UnitOfWorks;
 using SocialNetwork.Extensions;
+using SocialNetwork.Models.Users;
 
 namespace SocialNetwork.Controllers
 {
