@@ -13,6 +13,9 @@ namespace SocialNetwork.Data.AutoMapper
                 .ForMember(x => x.UserName, opt => opt.MapFrom(c => c.Login));
 
             CreateMap<LoginViewModel, User>();
+
+            CreateMap<UserEditViewModel, User>();
+            CreateMap<User, UserEditViewModel>().ForMember(x => x.UserId, opt => opt.MapFrom(c => c.Id));
         }
     }
 }
