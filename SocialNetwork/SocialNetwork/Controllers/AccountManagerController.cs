@@ -3,6 +3,7 @@ using SocialNetwork.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SocialNetwork.Controllers
 {
@@ -65,5 +66,20 @@ namespace SocialNetwork.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        [Route("MyPage")]
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> MyPage()
+        {
+            var user = User;
+
+            var result = _userManager.GetUserAsync(user);
+
+            return View("User", new UserViewModel(result.Result));
+        }
+
+
+
     }
 }
