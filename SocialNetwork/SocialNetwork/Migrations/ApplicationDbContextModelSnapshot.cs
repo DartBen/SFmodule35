@@ -155,7 +155,32 @@ namespace SocialNetwork.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SocialNetwork.Data.User", b =>
+            modelBuilder.Entity("SocialNetwork.Models.Users.Friend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CurrentFriendId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrentFriendId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFriends", (string)null);
+                });
+
+            modelBuilder.Entity("SocialNetwork.Models.Users.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -257,7 +282,7 @@ namespace SocialNetwork.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SocialNetwork.Data.User", null)
+                    b.HasOne("SocialNetwork.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -266,7 +291,7 @@ namespace SocialNetwork.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SocialNetwork.Data.User", null)
+                    b.HasOne("SocialNetwork.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -281,7 +306,7 @@ namespace SocialNetwork.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SocialNetwork.Data.User", null)
+                    b.HasOne("SocialNetwork.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -290,11 +315,30 @@ namespace SocialNetwork.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SocialNetwork.Data.User", null)
+                    b.HasOne("SocialNetwork.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SocialNetwork.Models.Users.Friend", b =>
+                {
+                    b.HasOne("SocialNetwork.Models.Users.User", "CurrentFriend")
+                        .WithMany()
+                        .HasForeignKey("CurrentFriendId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CurrentFriend");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

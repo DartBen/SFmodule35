@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SocialNetwork.Models;
 using SocialNetwork.Models.Users;
 using SocialNetwork.ViewModels.Account;
 
@@ -17,6 +18,9 @@ namespace SocialNetwork.Data.AutoMapper
 
             CreateMap<UserEditViewModel, User>();
             CreateMap<User, UserEditViewModel>().ForMember(x => x.UserId, opt => opt.MapFrom(c => c.Id));
+
+            CreateMap<UserWithFriendExt, User>();
+            CreateMap<User, UserWithFriendExt>();
         }
     }
 }
