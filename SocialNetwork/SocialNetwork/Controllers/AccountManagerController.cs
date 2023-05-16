@@ -120,14 +120,16 @@ namespace SocialNetwork.Controllers
 
         [Route("UserList")]
         [HttpPost]
-        public IActionResult UserList()
+        public IActionResult UserList(string search)
         {
             var model = new SearchViewModel
             {
-               UserList = _userManager.Users.ToList()
+                UserList = _userManager.Users.AsEnumerable().Where(x => x.GetFullName().ToLower().Contains(search.ToLower())).ToList()
             };
             return View("UserList", model);
         }
+
+
 
     }
 }
