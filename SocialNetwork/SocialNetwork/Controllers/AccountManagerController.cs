@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Data;
 using Microsoft.AspNetCore.Authorization;
 using SocialNetwork.Data.UnitOfWorks;
+using SocialNetwork.Extensions;
 
 namespace SocialNetwork.Controllers
 {
@@ -76,7 +77,57 @@ namespace SocialNetwork.Controllers
             return View("User", new UserViewModel(result.Result));
         }
 
+        [Route("Edit")]
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            var user = User;
 
+            var result = _userManager.GetUserAsync(user);
+
+            var editmodel = _mapper.Map<UserEditViewModel>(result.Result);
+
+            return View("Edit", editmodel);
+        }
+
+        [Authorize]
+        [Route("Update")]
+        [HttpPost]
+        public async Task<IActionResult> Update(UserEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(model.UserId);
+
+                user.Convert(model);
+
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("MyPage", "AccountManager");
+                }
+                else
+                {
+                    return RedirectToAction("Edit", "AccountManager");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Некорректные данные");
+                return View("Edit", model);
+            }
+        }
+
+        [Route("UserList")]
+        [HttpPost]
+        public IActionResult UserList()
+        {
+            var model = new SearchViewModel
+            {
+               UserList = _userManager.Users.ToList()
+            };
+            return View("UserList", model);
+        }
 
     }
 }
