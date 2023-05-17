@@ -12,8 +12,8 @@ using SocialNetwork.Data.Context;
 namespace SocialNetwork.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230516204842_AddFriends")]
-    partial class AddFriends
+    [Migration("20230517193324_init4")]
+    partial class init4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,6 +183,35 @@ namespace SocialNetwork.Migrations
                     b.ToTable("UserFriends", (string)null);
                 });
 
+            modelBuilder.Entity("SocialNetwork.Models.Users.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("RecipientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages", (string)null);
+                });
+
             modelBuilder.Entity("SocialNetwork.Models.Users.User", b =>
                 {
                     b.Property<string>("Id")
@@ -342,6 +371,25 @@ namespace SocialNetwork.Migrations
                     b.Navigation("CurrentFriend");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SocialNetwork.Models.Users.Message", b =>
+                {
+                    b.HasOne("SocialNetwork.Models.Users.User", "Recipient")
+                        .WithMany()
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialNetwork.Models.Users.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("Sender");
                 });
 #pragma warning restore 612, 618
         }

@@ -94,6 +94,7 @@
 .main-img {
     width: 100%;
     max-width: max-content;
+    align-content: center;
 }
 
 .text-size_12 {

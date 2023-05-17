@@ -7,7 +7,9 @@
     <div class="row">
 
         <div class="main">
+            <div class="mrgn center-align">
             <img class="main-img" src="@Model.User.Image" />
+            </div>
             <div class="center-align">
                 <form method="get" asp-controller="AccountManager" asp-action="Edit">
                     <input class="enter_submit" type="submit" value="Редактировать" />
@@ -43,33 +45,39 @@
             <div class="lined-block">
                 <label class="gray-text">Список друзей</label>
 
-                @if (Model.Friends.Count != 0)
+                @if (Model.Friends.Count == 0)
                 {
-
-                    @foreach (var user in @Model.Friends)
-                    {
-            <div>
-                <div class="mrgn center-align">
-                    <img src="@user.Image" class="ava" />
-                </div>
-                <div class="mrgn center-align">
-                    @user.GetFullName()
-                </div>
-                    <div class="mrgn center-align">
-                        <form asp-controller="AccountManager" asp-action="DeleteFriend" asp-route-id="@user.Id" method="post">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                Удалить из друзей
-                            </button>
-                        </form>
+                    <div>
+                        <label> У вас пока нет друзей.</label>
                     </div>
-                </div>
-                }
                 }
                 else
                 {
-                <div>
-                    <label> У вас пока нет друзей.</label>
-                </div>
+                    @foreach (var user in @Model.Friends)
+                    {
+                        <div>
+                            <div class="mrgn center-align">
+                                <img src="@user.Image" class="ava" />
+                            </div>
+                            <div class="mrgn center-align">
+                                @user.GetFullName()
+                            </div>
+                            <div class="mrgn center-align">
+                                <form asp-controller="AccountManager" asp-action="DeleteFriend" asp-route-id="@user.Id" method="post">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        Удалить из друзей
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="mrgn center-align">
+                                <form asp-controller="AccountManager" asp-action="Chat" asp-route-id="@user.Id" method="post">
+                                    <button type="submit" class="btn btn-sm btn-primary min-width-but">
+                                        Чат
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
                 }
 
             </div>

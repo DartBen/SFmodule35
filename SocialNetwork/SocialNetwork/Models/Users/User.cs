@@ -21,7 +21,7 @@ namespace SocialNetwork.Models.Users
 
         public User()
         {
-            Image = "https://thispersondoesnotexist.com/image";
+            Image = "https://avavatar.ru/images/avatars/5/avatar_evO6s6Sg9cK5Vgk7.jpg";
             Status = "Ура! Я в соцсети!";
             About = "Информация обо мне.";
         }

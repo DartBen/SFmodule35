@@ -20,6 +20,7 @@ namespace SocialNetwork
             builder.Services
                 .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
                 .AddCustomRepository<Friend, FriendsRepository>()
+                .AddCustomRepository<Message, MessageRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();
 
             builder.Services
