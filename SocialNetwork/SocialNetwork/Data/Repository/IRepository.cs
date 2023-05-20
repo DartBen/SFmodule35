@@ -1,11 +1,13 @@
-﻿namespace SocialNetwork.Data.Repository
+﻿using System.Collections;
+
+namespace SocialNetwork.Data.Repository
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
-        void Create(T item);
-        void Update(T item);
-        void Delete(T item);
+        IAsyncEnumerable<T> GetAll();
+        Task<T> Get(int id);
+        Task Create(T item);
+        Task Update(T item);
+        Task Delete(T item);
     }
 }

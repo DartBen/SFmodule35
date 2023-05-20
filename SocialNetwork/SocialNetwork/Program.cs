@@ -18,7 +18,7 @@ namespace SocialNetwork
             string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services
-                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
+                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped)
                 .AddCustomRepository<Friend, FriendsRepository>()
                 .AddCustomRepository<Message, MessageRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();

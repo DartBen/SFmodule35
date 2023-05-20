@@ -103,7 +103,7 @@ namespace SocialNetwork.Controllers
         {
             var repository = _unitOfWork.GetRepository<Friend>() as FriendsRepository;
 
-            return repository.GetFriendsByUser(user);
+            return await repository.GetFriendsByUser(user);
         }
 
         private async Task<List<User>> GetAllFriend()
@@ -112,7 +112,7 @@ namespace SocialNetwork.Controllers
             var result = await _userManager.GetUserAsync(user);
             var repository = _unitOfWork.GetRepository<Friend>() as FriendsRepository;
 
-            return repository.GetFriendsByUser(result);
+            return await repository.GetFriendsByUser(result);
         }
 
         [Route("Edit")]
