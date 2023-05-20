@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SocialNetwork.Models;
 using SocialNetwork.Models.Users;
 using SocialNetwork.ViewModels.Account;
 

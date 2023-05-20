@@ -1,6 +1,4 @@
-﻿using SocialNetwork.Models.Users;
-
-namespace SocialNetwork.Models
+﻿namespace SocialNetwork.Models.Users
 {
     public class UserWithFriendExt : User
     {

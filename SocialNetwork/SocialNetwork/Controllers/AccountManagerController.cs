@@ -7,7 +7,6 @@ using SocialNetwork.Data.UnitOfWorks;
 using SocialNetwork.Extensions;
 using SocialNetwork.Models.Users;
 using SocialNetwork.Data.Repository;
-using SocialNetwork.Models;
 using AwesomeNetwork.Data;
 
 namespace SocialNetwork.Controllers
