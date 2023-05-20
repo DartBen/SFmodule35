@@ -8,6 +8,7 @@ using SocialNetwork.Extensions;
 using SocialNetwork.Models.Users;
 using SocialNetwork.Data.Repository;
 using SocialNetwork.Models;
+using AwesomeNetwork.Data;
 
 namespace SocialNetwork.Controllers
 {
@@ -25,6 +26,25 @@ namespace SocialNetwork.Controllers
             _signInManager = signInManager;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+        }
+
+        [Route("Generate")]
+        [HttpGet]
+        public async Task<IActionResult> Generate()
+        {
+
+            var usergen = new GenetateUsers();
+            var userlist = usergen.Populate(35);
+
+            foreach (var user in userlist)
+            {
+                var result = await _userManager.CreateAsync(user, "123456");
+
+                if (!result.Succeeded)
+                    continue;
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [Route("Login")]
